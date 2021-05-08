@@ -46,13 +46,14 @@ body
 
 .button
 {   
+    font-size: 18px;
     font-weight: bold;
     color: whitesmoke;
     background-color: blueviolet;
     background-image: linear-gradient(navy, blueviolet);
-    width: 5em;
+    width: 60px;
     max-width: 24%;
-    height: 4em;
+    height: 60px;
     max-height: 15%;
     margin: 2px 0;
     border: transparent;
