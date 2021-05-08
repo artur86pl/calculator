@@ -1,0 +1,46 @@
+/* calculator */
+#calc
+{
+    text-align: center;
+    max-width: 260px;
+    background-color: darkslategray;
+    padding: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+
+
+/* display */
+#display
+{
+    margin-right: auto;
+    margin-left: auto;
+    min-height: 100px;
+    text-align: right;;
+    width: 232px;
+    background-color: aqua;
+}
+
+#calculations
+{
+ height: 30px;
+}
+
+#result
+{
+ min-height: 60px;
+}
+
+
+
+
+/* keyboard */
+
+.button
+{
+    min-width: 55px;
+    margin: 1px 0;
+}
