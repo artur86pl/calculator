@@ -6,76 +6,67 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">       
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
         <link rel="stylesheet" href="./style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap" rel="stylesheet">
 
     </head>
     <body>
-    <div id="container">
-        <div id="calc">
 
-            <div id="display">
-                <div id="calculations" class="h4">0</div>
-                <div id="result" class="h1">0</div>
+        <div id="container">
+
+            <div id="calc" class="col-xs-10 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+
+                <div id="display">
+                    <div id="calculations" class="h4">0</div>
+                    <div id="result" class="h1">0</div>
+                </div>
+
+                <div id="keyboard ">
+
+                    <!-- line 1 -->
+                    <div class="line">
+                        <input class="button" type="submit" value=% onclick="signButton(value, data, displayFn)">
+                        <input class="button" type="submit" value=C onclick="Clear(data, displayFn, displayResultFn)">
+                        <input class="button" type="submit" value=B onclick="back(data, cutString, displayFn)">
+                        <input class="button" type="submit" value=/ onclick="signButton(value, data, displayFn)">
+                    </div>
+
+                    <!-- line 2 -->
+                    <div class="line">
+                        <input class="button" type="submit" value=7 onclick="numberButton(value, data, displayFn)">
+                        <input class="button" type="submit" value=8 onclick="numberButton(value, data, displayFn)">
+                        <input class="button" type="submit" value=9 onclick="numberButton(value, data, displayFn)">
+                        <input class="button" type="submit" value=* onclick="signButton(value, data, displayFn)">
+                    </div>
+
+                    <!-- line 3 -->
+                    <div class="line">
+                        <input class="button" type="submit" value=4 onclick="numberButton(value, data, displayFn)">
+                        <input class="button" type="submit" value=5 onclick="numberButton(value, data, displayFn)">
+                        <input class="button" type="submit" value=6 onclick="numberButton(value, data, displayFn)">
+                        <input class="button" type="submit" value=- onclick="signButton(value, data, displayFn)">
+                    </div>
+
+                    <!-- line 4 -->
+                    <div class="line">
+                        <input class="button" type="submit" value=1 onclick="numberButton (value, data, displayFn)">
+                        <input class="button" type="submit" value=2 onclick="numberButton (value, data, displayFn)">
+                        <input class="button" type="submit" value=3 onclick="numberButton(value, data, displayFn)">
+                        <input class="button" type="submit" value=+ onclick="signButton(value, data, displayFn)">
+                    </div>
+
+                    <!-- line 5 -->
+                    <div class="line">
+                        <input class="button" type="submit" value="+/-" onclick="changeSingButton(data, displayFn, changeSignFn)">
+                        <input class="button" type="submit" value=0 onclick="numberButton(value, data, displayFn)">
+                        <input class="button" type="submit" value="." onclick="dottButton(value, data, displayFn, dottAvelable)">
+                        <input class="button" type="submit" value="=" onclick="equationButton(data)">
+                    </div>
+
+                </div> 
+
             </div>
 
-            <div id="keyboard ">
-
-                <!-- line 1 -->
-                <div class="line">
-                    <input class="button" type="submit" value=% onclick="setSign(value)">
-                    <input class="button" type="submit" value=Clear onclick="Clear()">
-                    <input class="button" type="submit" value=Back>
-                    <input class="button" type="submit" value=/ onclick="setSign(value)">
-                </div>
-
-                <!-- line 2 -->
-                <div class="line">
-                    <input class="button" type="submit" value=7 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=8 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=9 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=* onclick="setSign(value)">
-                </div>
-
-                <!-- line 3 -->
-                <div class="line">
-                    <input class="button" type="submit" value=4 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=5 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=6 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=- onclick="setSign(value)">
-                </div>
-
-                <!-- line 4 -->
-                <div class="line">
-                    <input class="button" type="submit" value=1 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=2 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=3 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value=+ onclick="setSign(value)">
-                </div>
-
-                <!-- line 5 -->
-                <div class="line">
-                    <input class="button" type="submit" value="+/-" onclick="plasMinus(number1)">
-                    <input class="button" type="submit" value=0 onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value="." onclick="readNumber(value, number1, number2, sign)">
-                    <input class="button" type="submit" value="=" onclick="dzialanie(number1, sign, number2)">
-                </div>
-            </div>
-         
-
-
         </div>
-        </div>
-
-
-
-        <!-- stary calc -->
-
-
-        <!-- <div>
-            <input id="pole1" type="text">
-            <input id="pole2" type="text">
-        </div> -->
-
-
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

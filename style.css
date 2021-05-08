@@ -1,10 +1,21 @@
+/* body */
+body
+{
+    font-family: 'Roboto Mono', monospace;
+}
+
+#container
+{
+    height: 100vh;
+    width: 100vw;
+    background-color: orange;
+    background-image: linear-gradient(to right, orange, blueviolet)
+}
+
 /* calculator */
 #calc
 {
-    text-align: center;
-    max-width: 260px;
-    background-color: darkslategray;
-    padding: 5px;
+    padding: 1em;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -15,32 +26,35 @@
 
 /* display */
 #display
-{
-    margin-right: auto;
-    margin-left: auto;
-    min-height: 100px;
-    text-align: right;;
-    width: 232px;
-    background-color: aqua;
-}
-
-#calculations
-{
- height: 30px;
-}
-
-#result
-{
- min-height: 60px;
-}
-
-
-
+ {
+    text-align: right;    
+    background-color: turquoise;
+    background-image: linear-gradient(to left, palegreen, turquoise);
+    /* background-image: url(glassBG.jpg); */
+    background-size: cover;
+    background-position: center;
+    border-radius: 30px;
+    padding: 0 25px;   
+} 
 
 /* keyboard */
+.line
+{
+    display: flex;
+    justify-content: space-between;
+}
 
 .button
-{
-    min-width: 55px;
-    margin: 1px 0;
+{   
+    font-weight: bold;
+    color: whitesmoke;
+    background-color: blueviolet;
+    background-image: linear-gradient(navy, blueviolet);
+    width: 5em;
+    max-width: 24%;
+    height: 4em;
+    max-height: 15%;
+    margin: 2px 0;
+    border: transparent;
+    border-radius: 20px;
 }

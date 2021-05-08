@@ -1,72 +1,146 @@
-let number1 = "";
-let number2 = "";
-let sign = "";
+// TO DO (13.11.19):
+// 1. DONE: document.addEventlistener - zmina tla wyswietlacza
+// 2. zabezpieczyc wyswietlacz przed za dlugimi liczbami
+// 3. DONE: zaprogramowac zmiane znaku na przycisku
+// 4. (CSS) zlikwidowac brzydka niebieska ramke ktora pojawia sie po wcisnieciu przycisku
+// 5. addEventlistener wyswietlanie mozliwych wynikow po najechaniu przycisku dzialania
+// 6. opracowac formule, ktora weryfikuje czy dzialamy na pierwszej liczbie data[1] czy drugiej data[2] - to powtarza sie przy 3-4 funkcjach
+// 7. oskryptowac kolejne dzialania na wyniku ktory otrzymalismy po użyciu przycisku "="
+// 8. wieksze liczby na przyciskach
 
-const setSign = (value) => 
+let data = ["", "", ""];
+const glassAudio = new Audio("glass.mp3");
+
+document.getElementById("display").addEventListener("click", function(){document.getElementById("display").style.backgroundImage = "url(glassBG5.jpg)"});
+document.getElementById("display").addEventListener("click", function(){glassAudio.play()});
+
+const numberButton = (value, data, displayFn) =>
 {
-    sign = value;
-    document.getElementById("calculations").innerHTML=number1+sign+number2;
-    return sign;
+    if (data[0] == "") data[1] = data[1] + value;
+    else data[2] = data[2] + value;
+    displayFn(data);    
+    console.log(data);
+    return data;
 }
 
-
-const Clear = () =>
+const dottButton = (value, data, displayFn, dottAvelable) => 
+/*nie wiem czy lepiej to scalić z numberButton() w mysl idei DRY, czy rozdzielic, 
+zeby dla jednego przypadku nie zaciemniac pozostalych przyciskow*/
 {
-    number1 = "";
-    number2 = "";
-    sign = "";
-    document.getElementById("calculations").innerHTML=0;
-    document.getElementById("result").innerHTML=0;
+    if (data[0] == "" && dottAvelable(data[1])) data[1] = data[1] + value;
+    else if (data[0] != "" && dottAvelable(data[2])) data[2] = data[2] + value;
+    else console.log("there is dott alredy");
+    displayFn(data);    
+    console.log(data);
+    return data;
 }
 
-const plasMinus = (number1) => //jak przypisac liczne ze zmienionym znakiem do number1/2?
+const signButton = (value, data, displayFn) =>
 {
-    n1 = parseInt(-number1);
-    document.getElementById("calculations").innerHTML=n1;
-    return n1;
+    data[0] = value;
+    console.log(data);
+    displayFn(data);
+    return data;
 }
 
-const readNumber = (digit) =>
+const dottAvelable = (tekst) =>
 {
-    console.log(sign);
-    if (sign == "") {
-        number1 = number1 + digit;
-    }
-    else {
-        number2 = number2 + digit;
-    }
-    document.getElementById("calculations").innerHTML=number1+sign+number2;
-    console.log("1:", number1, "2:", number2, "znak:", sign);        
+    
+    for (i=0; i < tekst.length; i++)
+        if (tekst.substring(i, i+1) == ".")
+        {
+            console.log("jest kropka");
+            const avelable = false;
+            return avelable;
+        }
+        else
+        {
+            console.log("nie ma");            
+        }
+    const avelable = true;    
+    return avelable;
 }
 
-const dzialanie = (number1, sign, number2) =>
-{
-    const n1 = parseInt(number1);
-    const n2 = parseInt(number2);
-    let wynik;
+// const isDotted 
 
-    switch (sign)
-    {  
-        case "+": 
-            wynik = n1 + n2;
+const Clear = (data) =>
+{
+    for (i = 0; i < 3; i++)
+    {                           /*  data[0] = "";    */
+        data[i] = "";           /*  data[1] = "";    */
+    }                           /*  data[2] = "";    */
+    console.log(data);
+    displayFn([0, 0, 0]);
+    displayResultFn(0);
+    document.getElementById("display").style.backgroundImage = "linear-gradient(to left, palegreen, turquoise)"
+    return data;
+}
+
+const back = (data, cutString, displayFn) =>    /* pewnie za dużo IFow, jeszcze do tego wroce, ale przynajmniej przecwiczyłem zaprzeczenia */
+{
+    if(!!data[2] && !!data[0] && !!data[1]) data[2] = cutString(data[2])    
+    else if (!data[2] && !!data[0] && !!data[1]) data[0] = cutString(data[0])
+    else if (!data[2] && !data[0] && !!data[1]) data[1] = cutString(data[1])
+    else data = ["", "", ""] /* to raczej nie powinno wystapic, ale narazie zostawiam jako bezpiecznik */
+    console.log(data);
+    if (!!data[1]) displayFn(data)
+    else displayFn([0, 0, 0])
+    return data;
+}
+
+const cutString = (stringToCut) => stringToCut.substring(0, stringToCut.length-1);
+
+const equationButton = (data) =>
+{
+    const number1 = parseFloat(data[1]);
+    const number2 = parseFloat(data[2]);
+    let result;
+
+    switch (data[0])
+    {
+        case "+":
+            result = number1 + number2;
             break;
+    }
+    switch (data[0])
+    {
         case "-":
-            wynik = n1 - n2;
-            break;
-        case "*":
-            wynik = n1 * n2;
-            break;
-        case "/":
-            wynik = n1 / n2;
-            break;
-        case "%":
-            wynik = n1 % n2;
+            result = number1 - number2;
             break;
     }
-    document.getElementById("result").innerHTML=wynik;
-    console.log("1:", number1, "2:", number2, "znak:", sign, "wynik:", wynik);
-    return wynik;
+    switch (data[0])
+    {
+        case "*":
+            result = number1 * number2;
+            break;
+    }
+    switch (data[0])
+    {
+        case "/":
+            result = number1 / number2;
+            break;
+    }
+    switch (data[0])
+    {
+        case "%":
+            result = number1 % number2;
+            break;
+    }
+    console.log(result);
+    displayResultFn(result);
 }
 
-// document.addEventListener("click", console.log("klikniecie"));
-document.addEventListener("click", console.log("klik"));
+const changeSingButton = (data, displayFn, changeSignFn) => 
+{
+    if (!data[0])   data[1] = "" + changeSignFn(data[1])    //nie moglem znalezc lepszego sposoby na konwersje na string xD 
+    if (!!data[0])  data[2] = "" + changeSignFn(data[2])    //a nie chce tracic kontroli nad typem danych
+    displayFn(data);    
+    console.log(data);
+    return data;
+}
+
+const changeSignFn = (oneOfData) => oneOfData = parseFloat(oneOfData) * (-1);
+
+const displayFn = (data) => document.getElementById("calculations").innerHTML=data[1]+data[0]+data[2];
+
+const displayResultFn = (result) => document.getElementById("result").innerHTML=result;
